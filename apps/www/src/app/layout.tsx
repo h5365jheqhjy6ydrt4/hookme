@@ -1,11 +1,9 @@
-import { GoogleAnalytics } from '@next/third-parties/google'
 import type { Metadata, Viewport } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 import localFont from 'next/font/local'
 import Script from 'next/script'
 
 import './globals.css'
-import { BuyMeACoffee } from '@/components/buy-me-a-coffee'
 import { siteConfig } from '@/config/site'
 import { cn } from '@/lib/utils'
 
@@ -85,20 +83,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         {children}
 
-        <BuyMeACoffee />
       </body>
 
-      {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
-      )}
-
-      {process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID && (
-        <Script
-          src="https://analytics.eu.umami.is/script.js"
-          data-website-id={process.env.NEXT_PUBLIC_UMAMI_WEBSITE_ID}
-          strategy="lazyOnload"
-        />
-      )}
+      
     </html>
   )
 }
