@@ -172,10 +172,10 @@ export default async function IndexPage() {
       <section id="pricing" className="container  py-16 lg:py-32">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center mb-8 lg:mb-12">
           <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-            Pricing
+            Impact
           </h2>
           <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-            Just kidding! usehooks-ts is free and open-source.
+            Use cases for integrating your data into the blockchain.
             <br />
             You can still make your contribution!
           </p>
@@ -236,7 +236,7 @@ export default async function IndexPage() {
               href="/introduction"
               className={cn(buttonVariants({ size: 'lg' }))}
             >
-              Explore the docs{` `}
+              Explore the latest{` `}
               <ChevronRight className="ml-3 h-5 w-5" />
             </Link>
           </div>
