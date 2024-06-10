@@ -2,7 +2,6 @@ import Link from 'next/link'
 
 import { DocSearch } from '@/components/doc-search'
 import { MainNav } from '@/components/main-nav'
-import { Twitter } from '@/components/ui/icons'
 import { marketingConfig } from '@/config/marketing'
 import { siteConfig } from '@/config/site'
 
@@ -27,7 +26,7 @@ export default async function MarketingLayout({
               rel="noreferrer"
               className="flex"
             >
-              <GitHub className="h-6 w-6 my-auto" />
+              <Twitter className="h-6 w-6 my-auto" />
               <span className="sr-only">Twitter</span>
             </Link>
           </nav>
