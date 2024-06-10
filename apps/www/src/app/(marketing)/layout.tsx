@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { DocSearch } from '@/components/doc-search'
 import { MainNav } from '@/components/main-nav'
-import { GitHub } from '@/components/ui/icons'
+import { Twitter } from '@/components/ui/icons'
 import { marketingConfig } from '@/config/marketing'
 import { siteConfig } from '@/config/site'
 
@@ -22,13 +22,13 @@ export default async function MarketingLayout({
             <DocSearch />
 
             <Link
-              href={siteConfig.links.github}
+              href={siteConfig.links.twitter}
               target="_blank"
               rel="noreferrer"
               className="flex"
             >
               <GitHub className="h-6 w-6 my-auto" />
-              <span className="sr-only">GitHub</span>
+              <span className="sr-only">Twitter</span>
             </Link>
           </nav>
         </div>
