@@ -2,7 +2,6 @@ import type { LucideIcon } from 'lucide-react'
 import { Blocks, ChevronRight, Gift, Star } from 'lucide-react'
 import Link from 'next/link'
 import type { BreadcrumbList, WithContext } from 'schema-dts'
-
 import { buttonVariants } from '@/components/ui/button'
 import {
   Code,
@@ -16,13 +15,11 @@ import {
 import { siteConfig } from '@/config/site'
 import { getHookList } from '@/lib/api'
 import { cn } from '@/lib/utils'
-
 type Feature = {
   icon: LucideIcon
   title: string
   content: string
 }
-
 const features: Feature[] = [
   {
     icon: Zap,
@@ -61,13 +58,46 @@ const features: Feature[] = [
       'Join the vibrant community! Collaborate, contribute, and unlock endless possibilities together.',
   },
 ]
-
-
-
-    
-
-
-
+async function getGitHubStars(): Promise<string | null> {
+  try {
+    const response = await fetch(
+      'https://api.github.com/repos/juliencrn/usehooks-ts',
+      {
+        headers: {
+          Accept: 'application/vnd.github+json',
+        },
+        next: {
+          revalidate: 60,
+        },
+      },
+    )
+    if (!response?.ok) {
+      return null
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const json = await response.json()
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/dot-notation
+    return parseInt(json['stargazers_count']).toLocaleString()
+  } catch (error) {
+    return null
+  }
+}
+export default async function IndexPage() {
+  const stars = await getGitHubStars()
+  const hooks = await getHookList()
+  const ldJson: WithContext<BreadcrumbList> = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    name: siteConfig.name,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    itemListElement: (hooks || []).map((hook, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: hook.name,
+      item: `${siteConfig.url}/react-hook/${hook.slug}`,
+    })),
+  }
   return (
     <>
       <script
@@ -76,7 +106,6 @@ const features: Feature[] = [
           __html: JSON.stringify(ldJson),
         }}
       />
-
       <section className="space-y-6 pb-12 pt-10 lg:py-32">
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
           <h1 className="font-heading text-3xl sm:text-5xl md:text-6xl lg:text-7xl">
@@ -96,7 +125,6 @@ const features: Feature[] = [
           </div>
         </div>
       </section>
-
       <section
         id="features"
         className="container space-y-6 bg-slate-50 dark:bg-transparent py-16 lg:py-32"
@@ -128,19 +156,17 @@ const features: Feature[] = [
           ))}
         </div>
       </section>
-
       <section id="pricing" className="container  py-16 lg:py-32">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center mb-8 lg:mb-12">
           <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
-            Impact
+            Pricing
           </h2>
           <p className="max-w-[85%] leading-normal text-muted-foreground sm:text-lg sm:leading-7">
-            Use cases for integrating your data into the blockchain.
+            Just kidding! usehooks-ts is free and open-source.
             <br />
             You can still make your contribution!
           </p>
         </div>
-
         <div className="mx-auto flex max-w-[40rem] divide-x divide-solid">
           <div className="flex-1 p-4 md:px-8 flex flex-col justify-end gap-3">
             <Link
@@ -168,7 +194,6 @@ const features: Feature[] = [
               Contribute
             </Link>
           </div>
-
           <div className="flex-1 p-4 md:px-8 flex flex-col justify-end gap-3">
             <Link
               href={`https://github.com/sponsors/juliencrn`}
@@ -185,7 +210,6 @@ const features: Feature[] = [
           </div>
         </div>
       </section>
-
       <section id="get-started" className="container py-16 lg:py-32">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
           <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
@@ -196,13 +220,12 @@ const features: Feature[] = [
               href="/introduction"
               className={cn(buttonVariants({ size: 'lg' }))}
             >
-              Explore the latest{` `}
+              Explore the docs{` `}
               <ChevronRight className="ml-3 h-5 w-5" />
             </Link>
           </div>
         </div>
       </section>
-
       <section id="open-source" className="container py-16 lg:py-32">
         <div className="mx-auto flex max-w-[58rem] flex-col items-center justify-center gap-4 text-center">
           <h2 className="font-heading text-3xl leading-[1.1] sm:text-3xl md:text-6xl">
