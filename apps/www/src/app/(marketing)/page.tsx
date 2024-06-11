@@ -62,51 +62,11 @@ const features: Feature[] = [
   },
 ]
 
-async function getGitHubStars(): Promise<string | null> {
-  try {
-    const response = await fetch(
-      'https://api.github.com/repos/juliencrn/usehooks-ts',
-      {
-        headers: {
-          Accept: 'application/vnd.github+json',
-        },
-        next: {
-          revalidate: 60,
-        },
-      },
-    )
 
-    if (!response?.ok) {
-      return null
-    }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const json = await response.json()
+    
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/dot-notation
-    return parseInt(json['stargazers_count']).toLocaleString()
-  } catch (error) {
-    return null
-  }
-}
 
-export default async function IndexPage() {
-  const stars = await getGitHubStars()
-  const hooks = await getHookList()
-
-  const ldJson: WithContext<BreadcrumbList> = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    name: siteConfig.name,
-    description: siteConfig.description,
-    url: siteConfig.url,
-    itemListElement: (hooks || []).map((hook, index) => ({
-      '@type': 'ListItem',
-      position: index + 1,
-      name: hook.name,
-      item: `${siteConfig.url}/react-hook/${hook.slug}`,
-    })),
-  }
 
   return (
     <>
