@@ -21,7 +21,7 @@ export default async function MarketingLayout({
             <DocSearch />
 
            
-            </Link>
+          
           </nav>
         </div>
       </header>
