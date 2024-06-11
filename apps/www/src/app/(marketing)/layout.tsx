@@ -20,14 +20,7 @@ export default async function MarketingLayout({
           <nav className="flex space-x-4 justify-center align-middle">
             <DocSearch />
 
-            <Link
-              href={siteConfig.links.twitter}
-              target="_blank"
-              rel="noreferrer"
-              className="flex"
-            >
-              <Twitter className="h-6 w-6 my-auto" />
-              <span className="sr-only">Twitter</span>
+           
             </Link>
           </nav>
         </div>
